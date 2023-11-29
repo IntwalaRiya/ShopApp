@@ -4,11 +4,11 @@ import axios from "axios";
 import config from '../../../config';
 import { useSelector } from "react-redux";
 
-export const removeFromWishlist = productId => (dispatch, getState) => {
+export const removeFromWishlist = (productId, user) => (dispatch, getState) => {
   return new Promise((resolve, reject) => {
-    const { user, loading } = useSelector(state => state.userrr);
+    
     const params = {
-      'User': user.Email,
+      'User': user,
       'Product': productId
     }
     const api = `${config.baseUrl}/removewishlist`

@@ -57,15 +57,15 @@ function Addresses() {
                 {address.Firstname.S} {address.Lastname.S}
               </span>
               <span className='city'>
-                {address.City.S}, {address.State}
+                {address.City.S}, {address.Street}
               </span>
               <span className='country'>{address.Country.S}</span>
               <span className='phone'>+20{address.PhoneNumber.S}</span>
               <span className='edit'>
-                <Link to={`/my_addresses/edit_address?addressId=${address.AddressID}`}>
+                <Link to={`/my_addresses/edit_address?addressId=${address.AddressID.S}`}>
                   Edit{" "}
                 </Link>
-                | <p onClick={() => handleDelete(address.AddressID)}>Delete</p>
+                | <p onClick={() => handleDelete(address.AddressID.S)}>Delete</p>
               </span>
             </div>
           </Col>

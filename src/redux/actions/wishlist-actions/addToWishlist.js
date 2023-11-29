@@ -4,14 +4,13 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import config from '../../../config';
 
-export const addToWishlist = productId => (dispatch, getState) => {
-  const { user } = useSelector(state => state.userrr);
+export const addToWishlist = (productId, id) => (dispatch, getState) => {
   const api = `${config.baseUrl}/addtowishlist`
   
   return new Promise((resolve, reject) => {
     let params = { 
       'ProductID': productId,
-      'UserID': user.Email
+      'UserID': id
     };
     axios
       .post(api, params, tokenConfig(getState, params))

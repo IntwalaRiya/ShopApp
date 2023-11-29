@@ -111,12 +111,12 @@ function CategoryProducts(props) {
                       <Col>
                         <i
                           onClick={() => {
-                            addTo(addToWishlist(product.ProductID.S));
+                            addTo(addToWishlist(product.ProductID.S, user.Email.S));
                           }}
                           class='fa fa-heart-o add-to-wishlist'
                           aria-hidden='true'
                           title='Add to wish list'
-                        />
+                        >Add to Wishlist</i>
                       </Col>
                     </Row>
                   </Card.Body>

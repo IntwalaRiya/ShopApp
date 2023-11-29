@@ -13,9 +13,10 @@ function WishList() {
   const { wishlistItems, loading } = useSelector(state => state.wishlisttt);
   const { user} = useSelector(state => state.userrr);
   const dispatch = useDispatch();
+  console.log(wishlistItems)
 
   useEffect(() => {
-    dispatch(fetchWishlistProducts(user.Email));
+    dispatch(fetchWishlistProducts(user.Email.S));
   }, [dispatch]);
 
   let loadingSpinner;
@@ -45,17 +46,17 @@ function WishList() {
               <tbody>
                 { wishlistItems && wishlistItems.length > 0 ? (wishlistItems.map(item => {
                   return (
-                    <tr key={item.product._id}>
+                    <tr key={item.Product.S}>
                       <td>
-                        <Link to={`/product/${item.product._id}`}>
-                          {item.product.name}
+                        <Link to={`/product/${item.Product.S}`}>
+                          {item.ProductName.S}
                         </Link>
                       </td>
-                      <td>${item.product.price}</td>
+                      <td>${item.ProductPrice.S}</td>
                       <td>
                         <Button
                           className='btn btn-danger'
-                          onClick={() => dispatch(removeFromWishlist(item.product._id))}>
+                          onClick={() => dispatch(removeFromWishlist(item.WishlistID.S, user.Email.S))}>
                           <FontAwesomeIcon icon={faTrash} />
                         </Button>
                       </td>

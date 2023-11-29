@@ -159,7 +159,7 @@ function SingleProduct(props) {
                       addTo(addToWishlist(product.ProductID.S));
                     }}
                     aria-hidden='true'
-                    title='Add to wish list'></i>
+                    title='Add to wish list'>Add to Wishlist</i>
                 </Col>
               </Row>
 
