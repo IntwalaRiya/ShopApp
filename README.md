@@ -4,4 +4,4 @@ This project has undergone scaling from a local environment to AWS infrastructur
 
 For detailed information on the project and its components, please refer to the [repository](https://github.com/moelashmawy/inventory-application/tree/master).
 
-![Alt text](<Shop App Architecture Diagram.jpg>)
+![ShopApp Application Architecture](<Shop App Architecture Diagram.jpg>)
