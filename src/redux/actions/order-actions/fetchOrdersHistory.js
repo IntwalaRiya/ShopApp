@@ -5,18 +5,22 @@ import {
 } from "../types";
 import { tokenConfig } from "../auth-actions/tokenConfig";
 import axios from "axios";
+import config from '../../../config';
 
 // to fetch each user's all orders he placed
-export const fetchOrdersHistory = () => (dispatch, getState) => {
+export const fetchOrdersHistory = (id) => (dispatch, getState) => {
   dispatch(fetchHistoryStarted());
-
+  const params = {
+    "User": id
+  }
+  const api = `${config.baseUrl}/fetchorderhistory`
   axios
-    .get("/api/order/userOrdersHistory", tokenConfig(getState))
+    .post(api, params, tokenConfig(getState))
     .then(res => {
       dispatch(fetchHistorySuccess(res.data.orders));
     })
     .catch(err => {
-      dispatch(fetchHistoryFailure(err.response.data.message));
+      dispatch(fetchHistoryFailure(err.message));
     });
 };
 

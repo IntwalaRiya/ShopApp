@@ -21,7 +21,7 @@ const ordersHistoryReducer = (state = initialState, action) => {
     case FETCH_HISTORY_SUCCESS:
       return {
         ...state,
-        historyOrders: action.payload.historyOrders,
+        historyOrders: Object.values(action.payload.historyOrders),
         loading: false,
         error: null
       };

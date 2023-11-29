@@ -10,11 +10,10 @@ import OrderProgress from "./OrderProgress";
 function Cart() {
   const { historyOrders, loading } = useSelector(state => state.historyyy);
   const { user } = useSelector(state => state.userrr);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrdersHistory());
+    dispatch(fetchOrdersHistory(user.Email.S));
   }, [dispatch]);
 
   let loadingSpinner;
@@ -25,8 +24,10 @@ function Cart() {
   }
 
   let emptyMessage;
-  if (!user && !loading && historyOrders.length === 0) {
+  if (historyOrders.length === 0) {
     emptyMessage = <Alert variant='warning'>No orders to show</Alert>;
+  }else{
+    emptyMessage = null
   }
 
   return (
@@ -43,46 +44,41 @@ function Cart() {
           {emptyMessage}
           {loadingSpinner}
 
-          {historyOrders.map(order => {
+          {historyOrders.map((order) => {
             let singleOrder = (
               <Row className='single-order' key={order._id}>
                 <Row className='single-order-heading'>
                   <Col>
                     <div className='order-time'>
-                      Order placed <span>{order.orderDate}</span>
+                      Order placed <span>{order.OrderDate}</span>
                     </div>
                   </Col>
                   <Col>
                     {order.totalPrice && (
                       <div className='order-todal-price'>
-                        Total: <span>${order.totalPrice}</span>
+                        Total: <span>${order.TotalPrice}</span>
                       </div>
                     )}
                   </Col>
                   <Col>
                     Shipped to:{" "}
-                    <span>{order.address.firstName + " " + order.address.lastName}</span>
+                    <span>{order.Firstname + " " + order.Lastname}</span>
                   </Col>
                   <Col>
                     <div className='order-id'>
-                      Order ID: #<span>{order._id}</span>
+                      Order ID: #<span>{order.OrderID}</span>
                     </div>
                   </Col>
                 </Row>
 
                 <Row className='order-delivered-time'>
-                  {order.deliveredDate && <div>Delivered on: {order.deliveredDate}</div>}
+                  {order.DeliveredDate && <div>Delivered on: {order.DeliveredDate}</div>}
                 </Row>
 
-                {order.products.map(productItem => (
-                  <Row className='single-order-item' key={productItem._id}>
+                  <Row className='single-order-item' key={order.Product.ProductID}>
                     <Col md='3'>
                       <Image
-                        src={`${
-                          process.env.PUBLIC_URL +
-                          "/" +
-                          productItem.product.productImage[0].path
-                        }`}
+                        src="https://shopappimages.s3.amazonaws.com/pictures/10-20B14_phoneFront.png"
                         thumbnail
                       />
                     </Col>
@@ -90,17 +86,17 @@ function Cart() {
                     <Col md='9'>
                       <Row>
                         <Col md='9'>
-                          <Link to={`/product/${productItem.product._id}`}>
-                            <div>{productItem.product.name}</div>
+                          <Link to={`/product/${order.Product.ProductID}`}>
+                            <div>{order.Product.Name}</div>
                           </Link>
                           <div className='quantity'>
-                            Quantity: <span>{productItem.quantity}</span>
+                            Quantity: <span>{order.OrderQuantity}</span>
                           </div>
                           <div className='price'>
                             $Total:
                             <span>
                               {" "}
-                              ${productItem.quantity * productItem.product.price}
+                              ${order.OrderQuantity * order.Product.Price}
                             </span>
                           </div>
                         </Col>
@@ -108,11 +104,8 @@ function Cart() {
                           <Button variant='secondary'>Return</Button>
                         </Col>
                       </Row>
-
-                      <OrderProgress state={productItem.orderState} />
                     </Col>
                   </Row>
-                ))}
               </Row>
             );
 

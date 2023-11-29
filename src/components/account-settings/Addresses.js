@@ -15,7 +15,7 @@ function Addresses() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAddresses(user.Email));
+    dispatch(fetchAddresses(user.Email.S));
   }, [dispatch]);
 
   // handle submit our form
