@@ -24,7 +24,7 @@ const productReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: null,
-        products: action.payload.products,
+        products: Object.values(action.payload.products),
         pagesCount: action.payload.pagesCount
       };
     case FETCH_PRODUCTS_FAILURE:

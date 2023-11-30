@@ -63,6 +63,7 @@ function AllProducts(props) {
         {error && <Col>{error}</Col>}
         {!loading &&
           products.map(product => {
+            console.log(product)
             return (
               <Col lg={3} key={product.ProductID} className='product-card'>
                 <Card>

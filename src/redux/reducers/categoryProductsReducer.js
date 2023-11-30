@@ -22,7 +22,7 @@ const categoryProductsReducer = (state = initialState, action) => {
       return {
         ...state,
         categoryName: action.payload.category.name,
-        categoryProducts: action.payload.products,
+        categoryProducts: Object.values(action.payload.products),
         loading: false,
         error: null
       };

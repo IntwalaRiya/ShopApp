@@ -8,6 +8,7 @@ import config from '../../../config';
 
 export const fetchSingleProductAction = id => {
   return dispatch => {
+    console.log(id)
     dispatch(fetchSingleProductStarted());
     const api = `${config.baseUrl}/getsingleproduct`
     const param = {
@@ -16,6 +17,7 @@ export const fetchSingleProductAction = id => {
     axios
       .post(api, param)
       .then(res => {
+        console.log("res: ", res)
         dispatch(fetchSingleProductSuccess(res.data.product));
       })
       .catch(error => {

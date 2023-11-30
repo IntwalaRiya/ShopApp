@@ -98,6 +98,7 @@ function SingleProduct(props) {
           />
         )}
         {error && <div>{error}</div>}
+        {console.log(product)}
         {product.CategoryID !== undefined && (
           <Row>
             <Col md='6' sm='12'>
@@ -179,7 +180,7 @@ function SingleProduct(props) {
                   <select
                     className='browser-default custom-select'
                     onChange={e => {
-                      setOrderQuantity(e.target.value);
+                      setOrderQuantity();
                     }}>
                     <option value={0}>QTY</option>
                     {options()}
@@ -191,7 +192,8 @@ function SingleProduct(props) {
                     variant='secondary'
                     onClick={() => {
                       let quantity = { orderQuantity };
-                      addTo(addToCart(product.ProductID.S, quantity, user.Email.S));
+                      console.log(product.ProductID.S, quantity, user.Email.S)
+                      dispatch(addToCart(product.ProductID.S, quantity, user.Email.S));
                     }}>
                     Add to cart
                   </Button>

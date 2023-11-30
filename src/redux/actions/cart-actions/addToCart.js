@@ -5,11 +5,13 @@ import config from '../../../config';
 
 export const addToCart = (productId, orderQuantity = null, userId) => (dispatch, getState) => {
   return new Promise((resolve, reject) => {
+    console.log(productId, userId)
     let params = { 
       'ProductID': productId,
       'OrderQuantity': orderQuantity['orderQuantity'],
       'UserID': userId
     };
+    console.log(params)
     const api = `${config.baseUrl}/addtocart`
     axios
       //api/cart/addToCart?productId=123123132
